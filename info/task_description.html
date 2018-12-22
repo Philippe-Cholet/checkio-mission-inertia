@@ -1,0 +1,93 @@
+<!-- Describe task in general -->
+<p>
+	This mission is an adaptation of the "Inertia" game (from
+	<a href="https://www.chiark.greenend.org.uk/~sgtatham/puzzles/">
+	Simon Tatham's Portable Puzzle Collection</a>).
+	If you are lost or just want to play, the game is available
+	<a href="https://www.chiark.greenend.org.uk/~sgtatham/puzzles/js/inertia.html">here</a>.
+</p>
+
+<p>
+	You're on a rectangular mined icefield: when you go in one direction,
+	you slide on the ice until you're stopped by a rock, the end of the icefield,
+	or some rough spot. But you're here for a good reason, <strong>there are gems
+	on the icefield: you have to find any route to collect them all,
+	avoiding the mines.</strong>
+</p>
+
+<p>
+	The icefield will be represented by a tuple of strings. Gems will be represented
+	by '$', rocks by 'X', mines by '*', ice by ' ' and rough spots by '.'.
+</p>
+
+<p>
+	You can go in all eight directions: northwest 'NW', north 'N', northeast 'NE',
+	west 'W', east 'E', southwest 'SW', south 'S', southeast 'SE'.
+</p>
+
+<pre class="for_info_only" style="text-align:center">
+<img src="{{MEDIA}}inertia-example.png" alt="8x10 example image"/>
+<!-- 10x8:bSgmswmwmgswgmmbwbwgbmsgbmwsswmsmsbgwwgwbbsbbwsmbsbsmwswgmgwsggbbsmswgmgmsmwgggb -->
+Dead route (you're stuck): ['SE', 'E', 'SE']
+
+Possible route: ['SE', 'E', 'W', 'NW', 'N',
+                 'S', 'SW', 'S', 'S', 'NE',
+                 'E', 'SE', 'E', 'N', 'SW',
+                 'NW', 'NW', 'SE', 'NE',   
+                 'NW', 'E', 'NE', 'N']     
+
+grid = (' .$*.X*X*$',        start = (0, 1)
+        '.X$** X X$',                      
+        ' *.$ *X..X',                      
+        '*.*. $XX$X',                      
+        '  .  X.* .',                      
+        ' .*X.X$*$X',                      
+        '.$$  .*.X$',                      
+        '*$*.*X$$$ ')                      
+</pre>
+
+
+<!-- Explain input and output values -->
+<p>
+	<strong>Input:</strong>
+	A tuple of strings and a tuple of two ints.
+</p>
+
+<p>
+	<strong>Output:</strong>
+	An iterable of strings.
+</p>
+
+
+<!-- Put some usage examples -->
+<div class="for_info_only">
+<p>
+	<strong>Example:</strong>
+</p>
+
+<pre class="brush: python">
+list(checkio((' .$*.X*X*$',
+              '.X$** X X$',
+              ' *.$ *X..X',
+              '*.*. $XX$X',
+              '  .  X.* .',
+              ' .*X.X$*$X',
+              '.$$  .*.X$',
+              '*$*.*X$$$ '), (0, 1))) = ['SE', 'E', 'W', 'NW', 'N', 
+                                         'S', 'SW', 'S', 'S', 'NE',
+                                         'E', 'SE', 'E', 'N', 'SW', 
+                                         'NW', 'NW', 'SE', 'NE',
+                                         'NW', 'E', 'NE', 'N']
+</pre>
+</div>
+
+<p>
+	<strong>Preconditions:</strong>
+	<ul>
+		<li>You can collect all gems in any possible order
+		(otherwise it would be far more difficult).</li>
+		<li>Given puzzles are solvable.</li>
+		<li>5 &le; len(grid) &le; 50 and 5 &le; len(grid[0]) &le; 50.</li>
+		<li>all(len(row) == len(grid[0]) for row in grid).</li>
+	</ul>
+</p>
