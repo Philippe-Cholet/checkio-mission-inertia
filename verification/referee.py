@@ -63,6 +63,11 @@ def checker(answer, result):
     return False, f"You have at least forgot one gem at {coord}."
 
 
+cover_iterable = '''
+def cover(func, in_data):
+    return list(func(*in_data))
+'''
+
 api.add_listener(
     ON_CONNECT,
     CheckiOReferee(
@@ -73,7 +78,7 @@ api.add_listener(
             'js': 'inertia'
             },
         cover_code = {
-            'python-3': cover_codes.unwrap_args,
+            'python-3': cover_iterable,
             'js-node': cover_codes.js_unwrap_args
             }
         ).on_ready
