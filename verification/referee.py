@@ -65,7 +65,7 @@ def checker(answer, result):
 
 cover_iterable = '''
 def cover(func, in_data):
-    return list(func(*in_data))
+    return list(func(*map(tuple, in_data)))
 '''
 
 api.add_listener(
