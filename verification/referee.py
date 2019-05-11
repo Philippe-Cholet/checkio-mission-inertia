@@ -41,11 +41,14 @@ def checker(answer, result):
     grid, (x, y) = answer
     grid = list(map(list, grid))
     nb_rows, nb_cols = len(grid), len(grid[0])
+    moves = []
     for nb, move in enumerate(result, 1):
         try:
             dx, dy = MOVES[move]
         except KeyError:
-            return False, f"I don't understand your {nb}-th move: '{move}'."
+            return False, (
+                    f"I don't understand your {nb}-th move: '{move}'.",
+                    moves)
         while 0 <= x + dx < nb_rows and 0 <= y + dy < nb_cols and \
               grid[x + dx][y + dy] != ROCK:
             x, y = x + dx, y + dy
@@ -54,13 +57,15 @@ def checker(answer, result):
             elif grid[x][y] == GEM:
                 grid[x][y] = ICE
             elif grid[x][y] == MINE:
-                return False, f"You are dead at {(x, y)}, bye!"
+                moves.append((x, y))
+                return False, (f"You are dead at {(x, y)}, bye!", moves)
+        moves.append((x, y))
     try:
         coord = next((i, j) for i, row in enumerate(grid)
                             for j, cell in enumerate(row) if cell == GEM)
     except StopIteration:
-        return True, f"Great, you did it in {nb} moves!"
-    return False, f"You have at least forgot one gem at {coord}."
+        return True, (f"Great, you did it in {nb} moves!", moves)
+    return False, (f"You have at least forgot one gem at {coord}.", moves)
 
 
 cover_iterable = '''
