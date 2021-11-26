@@ -1,7 +1,7 @@
 from typing import Tuple, Iterable
 
 def inertia(grid: Tuple[str], start: tuple) -> Iterable[str]:
-    # your code here
+    ...  # your code here
 
 
 if __name__ == '__main__':
